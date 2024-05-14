@@ -73,6 +73,9 @@ public:
     }
 
 private:
+    T* buffer_ = nullptr;
+    size_t capacity_ = 0;
+
     static T* Allocate(size_t n) {
         return n != 0 ? static_cast<T*>(operator new(n * sizeof(T))) : nullptr;
     }
@@ -80,9 +83,6 @@ private:
     static void Deallocate(T* buf) noexcept {
         operator delete(buf);
     }
-
-    T* buffer_ = nullptr;
-    size_t capacity_ = 0;
 };
 
 template <typename T>
